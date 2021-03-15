@@ -8,22 +8,9 @@
  */
 
 
-interface Department {
-    val departmentID : String
-}
-
-class DevDepartment : Department {
-    override val departmentID: String = "DEV"
-}
-
-class SalesDepartment : Department {
-    override val departmentID: String = "SALES"
-}
-
-class CsDepartment : Department {
-    override val departmentID: String = "CS"
-}
-
-class OfficeDepartment : Department {
-    override val departmentID: String = "OFFICE"
+enum class Department(val code:String, val description:String) {
+    Dev("DEV", "개발팀"),
+    Sales("SALES", "영업팀"),
+    Cs("CS", "고객대응팀"),
+    Office("OFFICE", "사무직")
 }

@@ -1,3 +1,4 @@
+import java.text.NumberFormat
 import java.util.*
 
 /*
@@ -63,12 +64,12 @@ class EmployeeManager {
         println("3: 고객대응팀")
         println("4: 사무직")
 
-        var department : Department = DevDepartment()
+        lateinit var department : Department
         when(readLine()) {
-            "1" -> department = DevDepartment()
-            "2" -> department = SalesDepartment()
-            "3" -> department = CsDepartment()
-            "4" -> department = OfficeDepartment()
+            "1" -> department = Department.Dev
+            "2" -> department = Department.Sales
+            "3" -> department = Department.Cs
+            "4" -> department = Department.Office
             else -> {}
         }
 
@@ -84,7 +85,7 @@ class EmployeeManager {
         시급 (파트타임)
         월급 (영업직)
         */
-        var employee : Employee = NormalEmployee(name, uuid, department,0)
+        lateinit var employee : Employee
         when(readLine()) {
             "1" -> {
                 //월급
@@ -115,7 +116,7 @@ class EmployeeManager {
         println("사원 정보가 입력되었습니다")
         println("사원명 : ${employee.employeeName}")
         println("식별번호 : ${employee.employeeUUID}")
-        println("부서 : ${employee.department.departmentID}")
+        println("부서 : ${employee.department.description}")
         println("월급 : ${employee.employeeSalary}")
         employees.add(employee)
     }
@@ -146,8 +147,9 @@ class EmployeeManager {
         for (i in employees) {
             println("사원명 : ${i.employeeName}")
             println("식별번호 : ${i.employeeUUID}")
-            println("부서 : ${i.department.departmentID}")
-            println("월급 : ${i.employeeSalary}")
+            println("부서 : ${i.department.description}")
+            val formatted = NumberFormat.getCurrencyInstance().format(i.employeeSalary)
+            println("월급 : $formatted")
             println("=====================")
         }
     }
@@ -159,7 +161,8 @@ class EmployeeManager {
         for (i in employees) {
             salary += i.employeeSalary
         }
-        println("사원 총 월급 : $salary")
+        val formatted = NumberFormat.getCurrencyInstance().format(salary)
+        println("사원 총 월급 : $formatted")
     }
 
     //사원 평균 월급 조회
@@ -170,7 +173,8 @@ class EmployeeManager {
             salary += i.employeeSalary
         }
         salary/=employees.size
-        println("사원 평균 월급 : ${salary/employees.size}")
+        val formatted = NumberFormat.getCurrencyInstance().format(salary)
+        println("사원 평균 월급 : $formatted")
     }
 
     //부서 총 월급 조회
@@ -185,35 +189,36 @@ class EmployeeManager {
         when(readLine()) {
             "1" -> {
                 for (i in employees) {
-                    if(i.department.departmentID == "DEV") {
+                    if(i.department == Department.Dev) {
                         salary+=i.employeeSalary
                     }
                 }
             }
             "2" -> {
                 for (i in employees) {
-                    if(i.department.departmentID == "SALES") {
+                    if(i.department == Department.Sales) {
                         salary+=i.employeeSalary
                     }
                 }
             }
             "3" -> {
                 for (i in employees) {
-                    if(i.department.departmentID == "CS") {
+                    if(i.department == Department.Cs) {
                         salary+=i.employeeSalary
                     }
                 }
             }
             "4" -> {
                 for (i in employees) {
-                    if(i.department.departmentID == "OFFICE") {
+                    if(i.department == Department.Office) {
                         salary+=i.employeeSalary
                     }
                 }
             }
             else -> {}
         }
-        println("부서 총 월급 : $salary")
+        val formatted = NumberFormat.getCurrencyInstance().format(salary)
+        println("부서 총 월급 : $formatted")
     }
 
     //부서 평균 월급 조회
@@ -226,10 +231,10 @@ class EmployeeManager {
 
         var salary : Long = 0
         var departmentEmployeeCount = 0
-        when(readLine()) {
+        when(readLine()!!) {
             "1" -> {
                 for (i in employees) {
-                    if(i.department.departmentID == "DEV") {
+                    if(i.department == Department.Dev) {
                         salary+=i.employeeSalary
                         departmentEmployeeCount++
                     }
@@ -237,7 +242,7 @@ class EmployeeManager {
             }
             "2" -> {
                 for (i in employees) {
-                    if(i.department.departmentID == "SALES") {
+                    if(i.department == Department.Sales) {
                         salary+=i.employeeSalary
                         departmentEmployeeCount++
                     }
@@ -245,7 +250,7 @@ class EmployeeManager {
             }
             "3" -> {
                 for (i in employees) {
-                    if(i.department.departmentID == "CS") {
+                    if(i.department == Department.Cs) {
                         salary+=i.employeeSalary
                         departmentEmployeeCount++
                     }
@@ -253,7 +258,7 @@ class EmployeeManager {
             }
             "4" -> {
                 for (i in employees) {
-                    if(i.department.departmentID == "OFFICE") {
+                    if(i.department == Department.Office) {
                         salary+=i.employeeSalary
                         departmentEmployeeCount++
                     }
@@ -261,19 +266,26 @@ class EmployeeManager {
             }
             else -> {}
         }
-        println("부서 평균 월급 : ${salary/departmentEmployeeCount}")
+        salary/=departmentEmployeeCount
+        val formatted = NumberFormat.getCurrencyInstance().format(salary)
+        println("부서 평균 월급 : ${formatted}")
     }
 
+    /*
+    관리 시스템 테스트용
+    랜덤 사원 데이터 생성 기능
+    */
     private fun makeRandomData() {
         println("생성할 랜덤 데이터 갯수를 입력해주세요")
-        for(i in 1..readLine()!!.toInt()) {
+        val dataCount = readLine()!!.toInt()
+        for(i in 1..dataCount) {
             val name = DataPile().randomName()
-            var department : Department = DevDepartment()
+            var department : Department = Department.Dev
             when((1..4).random()) {
-                1 -> department = DevDepartment()
-                2 -> department = SalesDepartment()
-                3 -> department = CsDepartment()
-                4 -> department = OfficeDepartment()
+                1 -> department = Department.Dev
+                2 -> department = Department.Sales
+                3 -> department = Department.Cs
+                4 -> department = Department.Office
                 else -> {}
             }
             val uuid : UUID = getRandomUUID()

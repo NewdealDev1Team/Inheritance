@@ -2,7 +2,35 @@
 //데이터 무더기
 class DataPile {
     fun randomName() : String {
-        val nameArray : Array<String> = arrayOf("민준","서준","예준","도윤","도윤","주원","하준","지호","지후","준서","준우","현우","도현","지훈","건우","우진","선우","서진","민재","현준","연우")
-        return nameArray[(0..20).random()]
+        val nameArray : Array<String> = arrayOf(
+            "민준",
+            "지원",
+            "준영",
+            "태인",
+            "현수",
+            "승훈",
+            "지우",
+            "승희",
+            "영환",
+            "세진",
+            "호진",
+            "규혁",
+            "성원",
+            "재혁",
+            "도겸",
+            "루이",
+            "민수",
+            "찬우",
+            "민재",
+            "도근",
+            "창범",
+            "상화",
+            "한서",
+            "승민",
+            "상현",
+            "문혁",
+            "지호",
+            )
+        return nameArray[(nameArray.indices).random()]
     }
 }
