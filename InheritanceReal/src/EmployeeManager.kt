@@ -37,7 +37,7 @@ class EmployeeManager {
                 1 -> showAllEmployee()
                 2 -> addEmployee()
                 3 -> searchEmployeeByName()
-                4 -> removeEmployeeByName()
+                4 -> removeEmployeeByNameAndId()
                 5 -> sumOfEmployeesSalary()
                 6 -> averageOfEmployeesSalary()
                 7 -> sumOfDepartmentSalary()
@@ -142,23 +142,20 @@ class EmployeeManager {
     }
 
     // Remove Employee
-    private fun removeEmployeeByName() {
+    private fun removeEmployeeByNameAndId() {
 
         if (employees.isEmpty()) {
             println("There is nothing to Remove !!! ")
         } else {
             print("Enter the name of the employee you want to remove. >> ")
-
             val inputName = readLine()
-            if (!employees.contains(inputName)) {
-                println("Wrong Name Entered !!!")
-            } else {
-                for (employee in employees) {
-                    if (employee.name == inputName) {
-                        employees.remove(employee)
-                        println("====== Successfully Removed =======\n")
-                        break
-                    }
+            print("Enter the id of the employee you want to remove. >> ")
+            val inputID = readLine()
+            for (employee in employees) {
+                if (employee.name == inputName && employee.id.toString() == inputID) {
+                    employees.remove(employee)
+                    println("====== Successfully Removed =======\n")
+                    break
                 }
             }
 
