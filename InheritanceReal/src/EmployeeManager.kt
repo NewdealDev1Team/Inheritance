@@ -1,3 +1,4 @@
+import java.text.NumberFormat
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -112,7 +113,7 @@ class EmployeeManager {
 
         println("\nPlease check the input information. >> ")
         println("Name : ${employee.name} \nID : ${employee.id} \nDepartment : ${employee.department.departmentName} \n" +
-                "Monthly Salary : ${employee.calculateSalary()}만원")
+                "Monthly Salary : ${NumberFormat.getCurrencyInstance(Locale.KOREA).format(employee.calculateSalary())}")
 
         employees.add(employee)
     }
@@ -172,7 +173,7 @@ class EmployeeManager {
         for (employee in employees) {
             sum += employee.calculateSalary()
         }
-        println("Total : ${sum}만원")
+        println("Total : ${NumberFormat.getCurrencyInstance(Locale.KOREA).format(sum)}")
     }
 
     // Average of Employees Salary
@@ -183,7 +184,7 @@ class EmployeeManager {
             sum += employee.calculateSalary()
         }
         val average = sum.div(employees.size)
-        println("Total : ${average}만원")
+        println("Total : ${NumberFormat.getCurrencyInstance(Locale.KOREA).format(average)}")
     }
 
     // Sum of Department Salary
@@ -199,7 +200,7 @@ class EmployeeManager {
             }
         }
 
-        println("TOTAl : $sum 만원")
+        println("TOTAl : ${NumberFormat.getCurrencyInstance(Locale.KOREA).format(sum)}")
     }
 
     // Average of Department Salary
@@ -218,7 +219,7 @@ class EmployeeManager {
         }
 
         val average = sum / count
-        println("TOTAl : $average 만원")
+        println("TOTAl : ${NumberFormat.getCurrencyInstance(Locale.KOREA).format(average)}")
     }
 
 }

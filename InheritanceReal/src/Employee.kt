@@ -4,8 +4,8 @@ open class Employee(val name: String, val id: UUID, val department: Department) 
     open fun calculateSalary() = 0
 
     companion object {
-        const val BASIC_YEARLY_SALARY = 12000
-        const val BASIC_DAILY_SALARY = 2.5
+        const val BASIC_YEARLY_SALARY = 120000000
+        const val BASIC_DAILY_SALARY = 25000
     }
 }
 
@@ -21,7 +21,7 @@ class PartTimeEmployee(
     private val workingHour: Int,
     private val workingDate: Int
 ) : Employee(name, id, department) {
-    override fun calculateSalary(): Int = BASIC_DAILY_SALARY.times(workingHour).times(workingDate).toInt()
+    override fun calculateSalary(): Int = BASIC_DAILY_SALARY.times(workingHour).times(workingDate)
 }
 
 class SalesEmployee(
