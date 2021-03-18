@@ -12,10 +12,9 @@ class EmployeeManager {
     }
 
     private fun printSelector() {
-
         println("\n1 > View All Employees")
         println("2 > Add Employee")
-        println("3 > Search One Employee By Name")
+        println("3 > Search Employee By Name")
         println("4 > Remove Employee")
         println("5 > Sum of All Employees' Salary")
         println("6 > Average of Employees' Salary")
@@ -118,6 +117,14 @@ class EmployeeManager {
         employees.add(employee)
     }
 
+    private fun printEmployeeInfo(employee: Employee) {
+        println("====== RESULT =======")
+        println("Name : ${employee.name}")
+        println("ID : ${employee.id}")
+        println("Department : ${employee.department.departmentName}")
+        println("Salary : ${employee.calculateSalary()}\n\n")
+    }
+
     private fun searchEmployeeByName() {
         if (employees.isEmpty()) {
             println("There is nothing to Search !!! ")
@@ -125,17 +132,9 @@ class EmployeeManager {
             print("Enter the name of the employee you want to find. >>  ")
             val inputName = readLine()
 
-            if (!employees.contains(inputName)) {
-                println("Wrong Name Entered!!!!")
-            } else {
-                for (employee in employees) {
-                    if (employee.name == inputName) {
-                        println("====== RESULT =======")
-                        println("Name : ${employee.name}")
-                        println("ID : ${employee.id}")
-                        println("Department : ${employee.department.departmentName}")
-                        println("Salary : ${employee.calculateSalary()}\n\n")
-                    }
+            for (employee in employees) {
+                if (employee.name == inputName) {
+                    printEmployeeInfo(employee)
                 }
             }
         }
