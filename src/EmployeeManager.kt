@@ -111,7 +111,7 @@ class EmployeeManager {
         println("월급 : ${employee.employeeSalary}")
         employees.add(employee)
     }
-}
 //사원들의 총 월급
 //사원의 평균 월급
 //부서별 총 월급, 평균 월급
+}
