@@ -19,7 +19,9 @@ class EmployeeManager {
         println("=====기능을 선택해주세요=====")
         println("1: 모든 사원 조회")
         println("2: 사원 추가")
-        println("3: 종료")
+        println("3: 사원 총 월급 조회")
+        println("4: 사원 평균 월급 조회")
+        println("7: 종료")
     }
     //사원 관리 메뉴
     fun start(){
@@ -31,7 +33,9 @@ class EmployeeManager {
             when(menuNumber) {
                 1->lookupEmployees()
                 2->addEmployee()
-                3->break
+                3->totalsalaryEmployee()
+                4->averagesalaryEmployee()
+                7->break
                 else->{}
             }
         }
@@ -111,7 +115,23 @@ class EmployeeManager {
         println("월급 : ${employee.employeeSalary}")
         employees.add(employee)
     }
-//사원들의 총 월급
-//사원의 평균 월급
-//부서별 총 월급, 평균 월급
+    //사원들의 총 월급
+    private fun totalsalaryEmployee() {
+        println("=======사원 총 월급=======")
+        var salary : Long = 0
+        for (i in employees) {
+            salary += i.employeeSalary
+        }
+        println("사원 총 월급 : ${salary}만원")
+    }
+    //사원의 평균 월급
+    private fun averagesalaryEmployee() {
+        println("=======사원 총 월급=======")
+        var salary : Long = 0
+        for (i in employees) {
+            salary += i.employeeSalary
+        }
+        salary/employees.size
+        println("사원 총 월급 : ${salary}원")
+    }
 }
