@@ -31,13 +31,14 @@ class EmployeeManager {
         while(menuNumber != 7) {
             managementMenu()
             menuNumber = readLine()?.toInt()!!
-            
+
             when(menuNumber) {
                 1->lookupEmployees()
                 2->addEmployee()
                 3->totalsalaryEmployee()
                 4->averagesalaryEmployee()
                 5->totalsalaryDepartment()
+                6->averagesalaryDepartment()
                 7->break
                 else->{}
             }
@@ -124,21 +125,22 @@ class EmployeeManager {
     //사원들의 총 월급
     private fun totalsalaryEmployee() {
         println("=======사원 총 월급=======")
-        var salary : Long = 0
+        var sumsalary : Long = 0
         for (i in employees) {
-            salary += i.employeeSalary
+            sumsalary += i.employeeSalary
         }
-        println("사원 총 월급 : ${salary}원")
+        println("사원 총 월급 : ${sumsalary}원")
     }
     //사원의 평균 월급
     private fun averagesalaryEmployee() {
         println("=======사원 평균 월급=======")
-        var salary : Long = 0
+        var sumsalary : Long = 0
+        var averagesalary : Long = 0
         for (i in employees) {
-            salary += i.employeeSalary
+            sumsalary += i.employeeSalary
         }
-        salary/employees.size
-        println("사원 평균 월급 : ${salary}원")
+        averagesalary = sumsalary/employees.size
+        println("사원 평균 월급 : ${averagesalary}원")
     }
     //부서별 총 월급
     private fun totalsalaryDepartment() {
@@ -148,7 +150,7 @@ class EmployeeManager {
         println("3: 고객대응팀")
         println("4: 사무직")
 
-        var salary : Long = 0
+        var sumsalary : Long = 0
         var lookupNumber = readLine()?.toInt()!!
 
         when(lookupNumber){
@@ -156,7 +158,7 @@ class EmployeeManager {
                 //개발팀
                 for (i in employees) {
                     if(i.department == Department.Dev) {
-                        salary+=i.employeeSalary
+                        sumsalary+=i.employeeSalary
                     }
                 }
             }
@@ -164,7 +166,7 @@ class EmployeeManager {
                 //영업팀
                 for (i in employees) {
                     if(i.department == Department.Sales) {
-                        salary+=i.employeeSalary
+                        sumsalary+=i.employeeSalary
                     }
                 }
             }
@@ -172,7 +174,7 @@ class EmployeeManager {
                 //고객대응팀
                 for (i in employees) {
                     if(i.department == Department.Cs) {
-                        salary+=i.employeeSalary
+                        sumsalary+=i.employeeSalary
                     }
                 }
             }
@@ -180,13 +182,71 @@ class EmployeeManager {
                 //사무직
                 for (i in employees) {
                     if(i.department == Department.Office) {
-                        salary+=i.employeeSalary
+                        sumsalary+=i.employeeSalary
                     }
                 }
             }
         }
         println("=======부서 총 월급=======")
-        println("부서 총 월급 : ${salary}원")
+        println("부서 총 월급 : ${sumsalary}원")
+    }
+    //부서별 평균 월급
+    private fun averagesalaryDepartment() {
+        println("조회할 부서를 지정해주세요")
+        println("1: 개발팀")
+        println("2: 영업팀")
+        println("3: 고객대응팀")
+        println("4: 사무직")
+
+        var sumsalary : Long = 0
+        var averagesalary : Long = 0
+        var count = 0
+        var lookupNumber = readLine()?.toInt()!!
+
+        when(lookupNumber){
+            1 -> {
+                //개발팀
+                for (i in employees) {
+                    if(i.department == Department.Dev) {
+                        sumsalary+=i.employeeSalary
+                        count++
+                    }
+                    averagesalary = sumsalary/count
+                }
+            }
+            2 -> {
+                //영업팀
+                for (i in employees) {
+                    if(i.department == Department.Sales) {
+                        sumsalary+=i.employeeSalary
+                        count++
+                    }
+                    averagesalary = sumsalary/count
+                }
+            }
+            3 -> {
+                //고객대응팀
+                for (i in employees) {
+                    if(i.department == Department.Cs) {
+                        sumsalary+=i.employeeSalary
+                        count++
+                    }
+                    averagesalary = sumsalary/count
+                }
+            }
+            4 -> {
+                //사무직
+                for (i in employees) {
+                    if(i.department == Department.Office) {
+                        sumsalary+=i.employeeSalary
+                        count++
+                    }
+                    averagesalary = sumsalary/count
+                }
+            }
+        }
+        println("=======부서 평균 월급=======")
+        println("부서 평균 월급 : ${averagesalary}원")
     }
 }
 
