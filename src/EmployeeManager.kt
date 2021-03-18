@@ -189,3 +189,4 @@ class EmployeeManager {
         println("부서 총 월급 : ${salary}원")
     }
 }
+
