@@ -41,13 +41,11 @@ class EmployeeManager {
     fun lookupEmployees() {
         println("=====모든 사원의 정보를 출력합니다=====")
         for (i in employees) {
-            val formatted = NumberFormat.getCurrencyInstance().format(i.employeeSalary)
-
             println("사원명 : ${i.employeeName}")
             println("식별번호 : ${i.employeeUUID}")
             println("부서 : ${i.department.departmentName}")
             println("계약형태 : ${i.employeecontract}")
-            println("월급 : $formatted")
+            println("월급 : ${i.employeeSalary}")
             println("=====================")
         }
     }
