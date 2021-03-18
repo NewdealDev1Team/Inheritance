@@ -1,6 +1,7 @@
 # Inheritance
 
-## 과제 (eunyeong1328 의 과제는 master branch에   )
+## 과제
+(eunyeong1328 의 과제는 master branch에 있어 파일에 들어가서 확인)
 
 사원의 종류는 다음과 같다 
 
